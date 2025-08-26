@@ -5,119 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Orixos Info</title>
 <style>
-  :root {
-    --primary-color: #00aaff;
-    --accent-color: #00aaff;
-    --bullet-size: 5px;
-    --profile-size: 120px;
-  }
-
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background: #0f0f0f;
-    color: var(--primary-color);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     overflow: hidden;
-    text-align: center;
     position: relative;
-    transition: filter 0.3s ease;
   }
 
   body.blur {
-    filter: blur(10px);
+    filter: blur(15px);
+    transition: filter 0.5s ease;
+  }
+
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    font-weight: bold;
+    color: #00aaff;
+    text-shadow: 0 0 20px #00aaff, 0 0 40px #00aaff;
+    cursor: pointer;
+    z-index: 9999;
   }
 
   img.profile {
-    width: var(--profile-size);
-    height: var(--profile-size);
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    border: 3px solid var(--accent-color);
-    margin-bottom: 20px;
+    border: 3px solid #00aaff;
     object-fit: cover;
+    margin-bottom: 20px;
+  }
+
+  h1, p {
+    color: #00aaff;
+    text-align: center;
+    margin: 0;
   }
 
   h1 {
     font-size: 3em;
-    color: var(--primary-color);
-    text-shadow: 0 0 10px var(--primary-color);
-    margin-bottom: 10px;
+    text-shadow: 0 0 10px #00aaff;
   }
 
   p {
     font-size: 1.2em;
-    color: var(--primary-color);
-    margin-bottom: 5px;
-  }
-
-  .bullet {
-    position: absolute;
-    width: var(--bullet-size);
-    height: var(--bullet-size);
-    background: var(--accent-color);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: fly 1s linear forwards;
-  }
-
-  @keyframes fly {
-    0% { transform: translateY(0) translateX(0); opacity: 1; }
-    100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-  }
-
-  #overlay {
-    position: fixed; /* FIXED ensures it stays on top */
-    top: 0;
-    left: 0;
-    width: 100%; 
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    color: #00aaff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5em;
-    cursor: pointer;
-    z-index: 9999; /* HIGH z-index ensures overlay is on top */
-    font-weight: bold;
-    text-shadow: 0 0 20px #00aaff, 0 0 40px #00aaff, 0 0 60px #00aaff;
+    margin-top: 10px;
   }
 </style>
 </head>
 <body class="blur">
-  <div id="overlay">Click to start</div>
 
+<div id="overlay">Click to start</div>
+
+<div id="content" style="display:none;">
   <img src="pfp_1.png" alt="Profile Picture" class="profile">
-  <h1 id="name">Orixos Info</h1>
-  <p id="title">Owner of CXM</p>
-
+  <h1>Orixos Info</h1>
+  <p>Owner of CXM</p>
   <audio id="bg-music" src="music.mp3" loop></audio>
+</div>
 
-  <script>
-    const music = document.getElementById('bg-music');
-    const overlay = document.getElementById('overlay');
-    const body = document.body;
+<script>
+  const overlay = document.getElementById('overlay');
+  const body = document.body;
+  const content = document.getElementById('content');
+  const music = document.getElementById('bg-music');
 
-    overlay.addEventListener('click', () => {
-      music.play();
-      overlay.style.display = 'none';
-      body.classList.remove('blur'); // remove blur when clicked
-    });
+  overlay.addEventListener('click', () => {
+    overlay.style.display = 'none';
+    body.classList.remove('blur');
+    content.style.display = 'flex';
+    music.play();
+  });
+</script>
 
-    // Falling bullets
-    setInterval(() => {
-      const bullet = document.createElement('div');
-      bullet.classList.add('bullet');
-      bullet.style.left = `${Math.random() * window.innerWidth}px`;
-      bullet.style.top = `${window.innerHeight}px`;
-      document.body.appendChild(bullet);
-      bullet.addEventListener('animationend', () => bullet.remove());
-    }, 500);
-  </script>
 </body>
 </html>
