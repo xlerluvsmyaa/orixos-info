@@ -3,10 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Vercel Page</title>
+  <title>Orixos Info!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff4c4c;
+      text-shadow: 0 0 10px #ff4c4c;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #ccc;
+    }
+
+    .button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background: #ff4c4c;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background: #ff0000;
+      transform: scale(1.1);
+    }
+
+    .bullet {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #ff4c4c;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fly 1s linear forwards;
+    }
+
+    @keyframes fly {
+      0% { transform: translateY(0) translateX(0); opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, Vercel!</h1>
-  <p>This is my first page deployed on Vercel.</p>
+  <h1>Welcome to Orixos Info</h1>
+  <p>Your personal guns.lol-style homepage</p>
+  <button class="button" onclick="shoot()">Shoot!</button>
+
+  <script>
+    function shoot() {
+      const bullet = document.createElement('div');
+      bullet.classList.add('bullet');
+
+      bullet.style.left = `${window.innerWidth/2 + (Math.random()*20-10)}px`;
+      bullet.style.top = `${window.innerHeight/2}px`;
+
+      document.body.appendChild(bullet);
+
+      bullet.addEventListener('animationend', () => {
+        bullet.remove();
+      });
+    }
+
+    setInterval(() => {
+      const bullet = document.createElement('div');
+      bullet.classList.add('bullet');
+      bullet.style.left = `${Math.random() * window.innerWidth}px`;
+      bullet.style.top = `${window.innerHeight}px`;
+      document.body.appendChild(bullet);
+      bullet.addEventListener('animationend', () => bullet.remove());
+    }, 500);
+  </script>
 </body>
 </html>
