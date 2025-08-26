@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orixos Info!</title>
+  <title>Orixos Info</title>
   <style>
     body {
       margin: 0;
@@ -19,20 +19,30 @@
       overflow: hidden;
     }
 
+    img.profile {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #ff4c4c;
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+
     h1 {
       font-size: 3em;
       color: #ff4c4c;
       text-shadow: 0 0 10px #ff4c4c;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     p {
       font-size: 1.2em;
       color: #ccc;
+      margin-bottom: 20px;
     }
 
     .button {
-      margin-top: 30px;
+      margin-top: 10px;
       padding: 10px 20px;
       background: #ff4c4c;
       border: none;
@@ -65,23 +75,21 @@
   </style>
 </head>
 <body>
+  <!-- Profile Picture -->
+  <img src="profile.jpg" alt="Profile Picture" class="profile">
+
   <h1>Welcome to Orixos Info</h1>
-  <p>Your personal guns.lol-style homepage</p>
+  <p>Owner of CXM</p>
   <button class="button" onclick="shoot()">Shoot!</button>
 
   <script>
     function shoot() {
       const bullet = document.createElement('div');
       bullet.classList.add('bullet');
-
       bullet.style.left = `${window.innerWidth/2 + (Math.random()*20-10)}px`;
       bullet.style.top = `${window.innerHeight/2}px`;
-
       document.body.appendChild(bullet);
-
-      bullet.addEventListener('animationend', () => {
-        bullet.remove();
-      });
+      bullet.addEventListener('animationend', () => bullet.remove());
     }
 
     setInterval(() => {
