@@ -74,16 +74,18 @@
   <p id="title">Owner of CXM</p>
 
   <!-- Background Music -->
-  <audio id="bg-music" src="music.mp3" loop></audio>
+  <audio id="bg-music" src="music.mp3" autoplay loop muted></audio>
 
   <script>
-    // Play music on first click (bypasses autoplay restrictions)
     const music = document.getElementById('bg-music');
-    function startMusic() {
-      music.play().catch(err => console.log('Autoplay blocked:', err));
-      document.removeEventListener('click', startMusic);
-    }
-    document.addEventListener('click', startMusic);
+
+    // Try to unmute after small delay
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        music.muted = false;
+        music.play().catch(err => console.log('Autoplay blocked:', err));
+      }, 500);
+    });
 
     // Random falling bullets
     setInterval(() => {
