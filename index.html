@@ -5,46 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orixos Info</title>
   <style>
+    :root {
+      --primary-color: #00aaff; /* Main text color */
+      --accent-color: #ff4c4c;  /* Bullets & borders */
+      --bullet-size: 5px;
+      --profile-size: 120px;
+    }
+
     body {
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
       background: #0f0f0f;
-      color: #fff;
+      color: var(--primary-color);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       overflow: hidden;
+      text-align: center;
     }
 
+    /* Profile picture */
     img.profile {
-      width: 120px;
-      height: 120px;
+      width: var(--profile-size);
+      height: var(--profile-size);
       border-radius: 50%;
-      border: 3px solid #ff4c4c;
+      border: 3px solid var(--accent-color);
       margin-bottom: 20px;
       object-fit: cover;
     }
 
     h1 {
       font-size: 3em;
-      color: #ff4c4c;
-      text-shadow: 0 0 10px #ff4c4c;
+      color: var(--primary-color);
+      text-shadow: 0 0 10px var(--primary-color);
       margin-bottom: 10px;
     }
 
     p {
       font-size: 1.2em;
-      color: #ccc;
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+
+    .discord {
+      font-size: 1.2em;
+      color: var(--accent-color);
       margin-bottom: 20px;
     }
 
     .button {
       margin-top: 10px;
       padding: 10px 20px;
-      background: #ff4c4c;
+      background: var(--accent-color);
       border: none;
       border-radius: 5px;
       color: #fff;
@@ -60,9 +75,9 @@
 
     .bullet {
       position: absolute;
-      width: 5px;
-      height: 5px;
-      background: #ff4c4c;
+      width: var(--bullet-size);
+      height: var(--bullet-size);
+      background: var(--accent-color);
       border-radius: 50%;
       pointer-events: none;
       animation: fly 1s linear forwards;
@@ -78,11 +93,15 @@
   <!-- Profile Picture -->
   <img src="pfp_1.png" alt="Profile Picture" class="profile">
 
-  <h1>Welcome to Orixos Info</h1>
-  <p>Owner of CXM</p>
+  <!-- Customizable Info -->
+  <h1 id="name">Orixos</h1>
+  <p id="title">Owner of CXM</p>
+  <p class="discord" id="discord">Discord: Orixos#1234</p>
+
   <button class="button" onclick="shoot()">Shoot!</button>
 
   <script>
+    // Bullet shooting function
     function shoot() {
       const bullet = document.createElement('div');
       bullet.classList.add('bullet');
@@ -92,6 +111,7 @@
       bullet.addEventListener('animationend', () => bullet.remove());
     }
 
+    // Random falling bullets
     setInterval(() => {
       const bullet = document.createElement('div');
       bullet.classList.add('bullet');
